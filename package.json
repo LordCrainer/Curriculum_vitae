@@ -1,7 +1,7 @@
 {
-  "name": "template",
+  "name": "curriculum",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "HOJA DE VIDA",
   "main": "src/main.js",
   "private": true,
   "scripts": {
