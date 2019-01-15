@@ -1,11 +1,12 @@
 <template>
-  <div id="app"></div>
+  <div id="app"><headerCard></headerCard></div>
 </template>
 
 <script>
+import headerCard from "./componentes/headerCard.vue";
 export default {
   name: "App",
-  components: {}
+  components: { headerCard }
 };
 </script>
 
