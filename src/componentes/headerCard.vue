@@ -9,64 +9,44 @@
           <v-card-text>
             <v-container>
               <v-layout wrap row>
-                <v-flex xs8>
-                  <v-flex>
-                    <v-layout row>
-                      <v-flex xs4>
-                        <v-card-text class="text-xs-left pa-2"
-                          ><strong>NOMBRE:</strong></v-card-text
+                <v-flex xs12 sm8>
+                  <v-flex xs12>
+                    <v-layout
+                      wrap
+                      row
+                      v-for="(datos, ind) in datosPersonales"
+                      :key="ind"
+                    >
+                      <v-flex xs12 sm3>
+                        <v-card-text class="text-sm-right pa-2 text-xs-center"
+                          ><strong>{{ datos.titulo }}:</strong></v-card-text
                         >
                       </v-flex>
-                      <v-flex xs8>
-                        <v-card-text class="text-xs-left pa-2">
-                          {{ datosPersonales.Nombre }}
-                          {{ datosPersonales.Apellido }}
+                      <v-flex xs12 sm9>
+                        <v-card-text class="text-sm-left pa-2 text-xs-center">
+                          {{ datos.nombre }}
                         </v-card-text>
                       </v-flex>
                     </v-layout>
-                    <v-layout row>
-                      <v-flex xs4>
-                        <v-card-text class="text-xs-left pa-2"
-                          ><strong>CÉDULA:</strong></v-card-text
-                        >
-                      </v-flex>
-                      <v-flex xs8>
-                        <v-card-text class="text-xs-left pa-2">
-                          {{ datosPersonales.Cedula }}
-                        </v-card-text>
-                      </v-flex>
-                    </v-layout>
-                    <v-card-text class="text-xs-left pa-2">
-                      <strong>Cédula:</strong> {{ datosPersonales.Cedula }}
-                    </v-card-text></v-flex
-                  >
-                  <v-card-text class="text-xs-left pa-2">
-                    <strong>Fecha:</strong>
-                    {{ datosPersonales.Fecha_Nacimiento }}
-                  </v-card-text>
-                  <v-card-text class="text-xs-left pa-2">
-                    <strong>Celular:</strong> {{ datosPersonales.Celular }}
-                  </v-card-text>
-                  <v-card-text class="text-xs-left pa-2">
-                    <strong>Correo: </strong>{{ datosPersonales.Email }}
-                  </v-card-text>
-                  <v-card-text class="text-xs-left pa-2">
-                    <strong>Correo2:</strong> {{ datosPersonales.Email2 }}
-                  </v-card-text>
-                  <v-card-text class="text-xs-left pa-2">
-                    <strong>Teléfono:</strong> {{ datosPersonales.Telefono }}
-                  </v-card-text>
-                  <v-card-text class="text-xs-left pa-2">
-                    <strong>Dirección:</strong> {{ datosPersonales.Direccion }}
-                  </v-card-text>
+                  </v-flex>
                 </v-flex>
-                <v-flex>
-                  <v-img
-                    height="150"
-                    width="100"
-                    src="https://uploads.codesandbox.io/uploads/user/17fffd86-3ee1-4ca9-abc0-4e76a2cb57f0/dfNi-img.jpg"
-                    aspect-ratio="0.75"
-                  ></v-img>
+                <v-flex xs12 sm4>
+                  <v-layout row justify-center align-center>
+                    <v-flex xs12>
+                      <v-hover>
+                        <v-img
+                          slot-scope="{
+                            hover
+                          }"
+                          :class="`elevation-${hover ? 5 : 3}`"
+                          height="200"
+                          width="150"
+                          src="https://uploads.codesandbox.io/uploads/user/17fffd86-3ee1-4ca9-abc0-4e76a2cb57f0/dfNi-img.jpg"
+                          aspect-ratio="0.75"
+                        ></v-img>
+                      </v-hover>
+                    </v-flex>
+                  </v-layout>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -106,9 +86,17 @@
             {{ info.item.descripcion }}
           </v-card-text>
         </TimeCard>
-        <v-card>
-          <v-card-text class="box "> CONOCIMIENTOS </v-card-text>
-        </v-card>
+        <TimeCard tema="CONOCIMIENTOS" :data="conocimientos">
+          <v-card-title slot="titulo">IDOMA</v-card-title>
+          <v-layout> </v-layout>
+          <v-card-text name="header"
+            ><v-card-text>nivel1</v-card-text>
+            <v-card-text>nivel1</v-card-text></v-card-text
+          >
+          <v-card-text slot="descripcion" slot-scope="know">
+            {{ know.item.IDIOMA }}</v-card-text
+          >
+        </TimeCard>
       </v-flex>
     </v-layout>
   </v-container>
@@ -125,7 +113,7 @@ export default {
         { nombre: "0926795840", titulo: "CÉDULA" },
         { nombre: "30 de Junio de 1994", titulo: "FECHA" },
         { nombre: "camogan3000@hotmail.com", titulo: "EMAIL" },
-        { nombre: "caangarc@espol.edu.ec", titulo: "EMAIL (SECUNDARIO)" },
+        { nombre: "caangarc@espol.edu.ec", titulo: "EMAIL 2" },
         { nombre: "0967590148", titulo: "CELULAR" },
         { nombre: "5112460", titulo: "TELÉFONO" },
         {
@@ -138,7 +126,7 @@ export default {
           inicio: 2019,
           fin: 2020,
           descripcion:
-            "Cursando Noveno Semestre de la carrera Ingenería Electrónica y Telecomunicaciones en la Espol"
+            "Cursando Decimo Semestre de la carrera Ingenería Electrónica y Telecomunicaciones en la Espol"
         },
         {
           inicio: 2006,
@@ -162,25 +150,26 @@ export default {
         {
           inicio: 2012,
           fin: 2019,
-          descripcion: "Diseñador Gráfico tanto 2D como 3D"
+          descripcion:
+            "Diseñador Gráfico y modelado, tanto en el área de 2D y 3D."
         },
         {
           inicio: 2015,
           fin: 2018,
           descripcion:
-            "Instalación y Configuración de equipos asociados al área de las telecomunicaciones y la seguridad, como antenas y cámaras de seguridad"
+            "Instalación y Configuración de equipos asociados al área de las telecomunicaciones y la seguridad, como antenas y cámaras de seguridad."
         },
         {
           inicio: 2015,
           fin: 2019,
           descripcion:
-            "Desarrollador de Hardware usando PIC, Arduino y Raspberry Pi"
+            "Desarrollador de Hardware usando PIC, Arduino y Raspberry Pi, para la realización de proyectos académicos de tercer nivel y cuarto nivel."
         },
         {
           inicio: 2015,
           fin: 2019,
           descripcion:
-            "Desarrollador de páginas web mediante el stack MEVN (Mongodb, Express.js, Vue.js y Node.js)"
+            "Desarrollador y Diseño de páginas web mediante el stack MEVN (Mongodb, Express.js, Vue.js y Node.js)."
         }
       ],
       conocimientos: [
@@ -206,8 +195,8 @@ export default {
         {
           INFORMATICA: [
             { nombre: "Javascript", nivel: "medio-alto" },
-            { nombre: "Node.js", nivel: "medio-alto" },
             { nombre: "Vue.js", nivel: "medio-alto" },
+            { nombre: "Node.js", nivel: "medio-alto" },
             { nombre: "C (lib. Arduino)", nivel: "medio-alto" },
             { nombre: "Assembler", nivel: "medio-alto" },
             { nombre: "Mongodb", nivel: "medio" },
@@ -238,7 +227,7 @@ export default {
 <style>
 .box {
   background-color: rgb(76, 175, 80);
-  border: 1px solid red;
+  border-bottom: 3px solid black;
   color: white;
   font-size: 18px;
   font-weight: bold;
