@@ -54,7 +54,8 @@
         </v-card>
       </v-flex>
       <v-flex>
-        <TimeCard :data="formacionAcademica" tema="FORMACIÓN ACADÉMICA">
+        <TimeCard :data="formacionAcademica">
+          <v-card-text class="box" slot="tema">FORMACIÓN ACADÉMICA</v-card-text>
           <v-card-text
             class="text-xs-left pa-2"
             slot="time"
@@ -70,7 +71,8 @@
             {{ info.item.descripcion }}
           </v-card-text>
         </TimeCard>
-        <TimeCard :data="experienciaLaboral" tema="EXPERIENCIA LABORAL">
+        <TimeCard :data="experienciaLaboral">
+          <v-card-text class="box" slot="tema">EXPERIENCIA LABORAL</v-card-text>
           <v-card-text
             class="text-xs-left pa-2"
             slot="time"
@@ -86,16 +88,42 @@
             {{ info.item.descripcion }}
           </v-card-text>
         </TimeCard>
-        <TimeCard tema="CONOCIMIENTOS" :data="conocimientos">
-          <v-card-title slot="titulo">IDOMA</v-card-title>
-          <v-layout> </v-layout>
-          <v-card-text name="header"
-            ><v-card-text>nivel1</v-card-text>
-            <v-card-text>nivel1</v-card-text></v-card-text
+        <TimeCard :data="conocimientos">
+          <v-card-text class="box" slot="tema">CONOCIMIENTOS</v-card-text>
+          <v-card-text
+            slot="informacion"
+            v-for="(conoc, index) in conocimientos"
+            :key="index"
           >
-          <v-card-text slot="descripcion" slot-scope="know">
-            {{ know.item.IDIOMA }}</v-card-text
-          >
+            <v-card-title slot="titulo " class="title font-weight-bold pa-2">{{
+              conoc.titulo
+            }}</v-card-title>
+            <v-divider></v-divider>
+            <v-layout row>
+              <v-flex xs4>
+                <v-card-text class="text-xs-left pa-3 body-2 font-weight-bold"
+                  >NOMBRE</v-card-text
+                >
+              </v-flex>
+              <v-flex xs8>
+                <v-card-text class="text-xs-left  pa-3 body-2 font-weight-bold"
+                  >NIVEL</v-card-text
+                >
+              </v-flex>
+            </v-layout>
+            <v-layout row v-for="dato in conoc.dato" :key="dato.nombre">
+              <v-flex xs4
+                ><v-card-text class="text-xs-left pa-2 pl-3">{{
+                  dato.nombre
+                }}</v-card-text></v-flex
+              >
+              <v-flex xs8
+                ><v-card-text class="text-xs-left pa-2 pl-3">{{
+                  dato.nivel
+                }}</v-card-text></v-flex
+              >
+            </v-layout>
+          </v-card-text>
         </TimeCard>
       </v-flex>
     </v-layout>
@@ -174,49 +202,53 @@ export default {
       ],
       conocimientos: [
         {
-          IDIOMA: [
-            { nivel: "medio-alto", nombre: "Inglés" },
-            { nivel: "alto", nombre: "Español" }
+          titulo: "IDIOMA",
+          dato: [
+            { nivel: "Medio-Alto", nombre: "Inglés" },
+            { nivel: "Alto", nombre: "Español" }
           ]
         },
         {
-          PROGRAMAS: [
-            { nombre: "Photoshop", nivel: "medio" },
-            { nombre: "Illustrator", nivel: "medio" },
-            { nombre: "Sketchup", nivel: "medio-alto" },
-            { nombre: "Word", nivel: "medio-alto" },
-            { nombre: "Power Point", nivel: "alto" },
-            { nombre: "Excel", nivel: "medio-alto" },
-            { nombre: "Proteus", nivel: "medio-alto" },
-            { nombre: "Ansys Electronic", nivel: "medio" },
-            { nombre: "Lab View", nivel: "medio" }
+          titulo: "PROGRAMAS",
+          dato: [
+            { nombre: "Photoshop", nivel: "Medio" },
+            { nombre: "Illustrator", nivel: "Medio" },
+            { nombre: "Sketchup", nivel: "Medio-Alto" },
+            { nombre: "Word", nivel: "Medio-Alto" },
+            { nombre: "Power Point", nivel: "Alto" },
+            { nombre: "Excel", nivel: "Medio-Alto" },
+            { nombre: "Proteus", nivel: "Medio-Alto" },
+            { nombre: "Ansys Electronic", nivel: "Medio" },
+            { nombre: "Lab View", nivel: "Medio" }
           ]
         },
         {
-          INFORMATICA: [
-            { nombre: "Javascript", nivel: "medio-alto" },
-            { nombre: "Vue.js", nivel: "medio-alto" },
-            { nombre: "Node.js", nivel: "medio-alto" },
-            { nombre: "C (lib. Arduino)", nivel: "medio-alto" },
-            { nombre: "Assembler", nivel: "medio-alto" },
-            { nombre: "Mongodb", nivel: "medio" },
-            { nombre: "C", nivel: "medio" },
-            { nombre: "GIT", nivel: "medio" },
-            { nombre: "Python", nivel: "medio" },
-            { nombre: "PHP", nivel: "medio" },
-            { nombre: "Linux", nivel: "medio" },
-            { nombre: "GIT", nivel: "medio" },
+          titulo: "INFORMATICA",
+          dato: [
+            { nombre: "Javascript", nivel: "Medio-Alto" },
+            { nombre: "Vue.js", nivel: "Medio-Alto" },
+            { nombre: "Node.js", nivel: "Medio-Alto" },
+            { nombre: "C (lib. Arduino)", nivel: "Medio-Alto" },
+            { nombre: "Assembler", nivel: "Medio-Alto" },
+            { nombre: "Mongodb", nivel: "Medio" },
+            { nombre: "C", nivel: "Medio" },
+            { nombre: "GIT", nivel: "Medio" },
+            { nombre: "Python", nivel: "Medio" },
+            { nombre: "PHP", nivel: "Medio" },
+            { nombre: "Linux", nivel: "Medio" },
+            { nombre: "GIT", nivel: "Medio" },
             { nombre: "POO", nivel: "bajo" }
           ]
         },
         {
-          OTROS_CONOC: [
-            { nombre: "Hosting && Dominio", nivel: "medio-alto" },
-            { nombre: "Electrónca", nivel: "medio-alto" },
-            { nombre: "Diseño 2D", nivel: "medio-alto" },
-            { nombre: "Diseño 3D", nivel: "medio-alto" },
-            { nombre: "Redes Conmutadas", nivel: "medio" },
-            { nombre: "Edición de Video", nivel: "medio" }
+          titulo: "OTROS",
+          dato: [
+            { nombre: "Hosting && Dominio", nivel: "Medio-Alto" },
+            { nombre: "Electrónca", nivel: "Medio-Alto" },
+            { nombre: "Diseño 2D", nivel: "Medio-Alto" },
+            { nombre: "Diseño 3D", nivel: "Medio-Alto" },
+            { nombre: "Redes Conmutadas", nivel: "Medio" },
+            { nombre: "Edición de Video", nivel: "Medio" }
           ]
         }
       ]

@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-card-text class="box "> {{ tema }} </v-card-text>
+    <slot name="tema"></slot> <slot name="informacion"></slot>
     <v-card-text>
       <v-container>
         <slot name="titulo"></slot> <slot name="otro"></slot>
