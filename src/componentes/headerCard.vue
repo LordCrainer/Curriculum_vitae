@@ -3,7 +3,10 @@
     <v-layout column>
       <v-flex>
         <v-card>
-          <v-card-text class="text-md-center box">
+          <v-card-text class="pa-5 display-1 font-weight-bold"
+            >HOJA DE VIDA</v-card-text
+          >
+          <v-card-text class="text-md-center box title">
             INFORMACIÓN PERSONAL
           </v-card-text>
           <v-card-text>
@@ -55,7 +58,9 @@
       </v-flex>
       <v-flex>
         <TimeCard :data="formacionAcademica">
-          <v-card-text class="box" slot="tema">FORMACIÓN ACADÉMICA</v-card-text>
+          <v-card-text class="box title" slot="tema"
+            >FORMACIÓN ACADÉMICA</v-card-text
+          >
           <v-card-text
             class="text-xs-left pa-2"
             slot="time"
@@ -72,7 +77,9 @@
           </v-card-text>
         </TimeCard>
         <TimeCard :data="experienciaLaboral">
-          <v-card-text class="box" slot="tema">EXPERIENCIA LABORAL</v-card-text>
+          <v-card-text class="box title" slot="tema"
+            >EXPERIENCIA LABORAL</v-card-text
+          >
           <v-card-text
             class="text-xs-left pa-2"
             slot="time"
@@ -89,7 +96,7 @@
           </v-card-text>
         </TimeCard>
         <TimeCard :data="conocimientos">
-          <v-card-text class="box" slot="tema">CONOCIMIENTOS</v-card-text>
+          <v-card-text class="box title" slot="tema">CONOCIMIENTOS</v-card-text>
           <v-card-text
             slot="informacion"
             v-for="(conoc, index) in conocimientos"
@@ -100,28 +107,58 @@
             }}</v-card-title>
             <v-divider></v-divider>
             <v-layout row>
-              <v-flex xs4>
+              <v-flex xs6 sm6>
                 <v-card-text class="text-xs-left pa-3 body-2 font-weight-bold"
                   >NOMBRE</v-card-text
                 >
               </v-flex>
-              <v-flex xs8>
+              <v-flex xs6 sm6>
                 <v-card-text class="text-xs-left  pa-3 body-2 font-weight-bold"
                   >NIVEL</v-card-text
                 >
               </v-flex>
             </v-layout>
             <v-layout row v-for="dato in conoc.dato" :key="dato.nombre">
-              <v-flex xs4
+              <v-flex xs6 sm6
                 ><v-card-text class="text-xs-left pa-2 pl-3">{{
                   dato.nombre
                 }}</v-card-text></v-flex
               >
-              <v-flex xs8
-                ><v-card-text class="text-xs-left pa-2 pl-3">{{
-                  dato.nivel
-                }}</v-card-text></v-flex
-              >
+              <v-flex xs6 sm6
+                ><v-card-text class="text-xs-left pa-2 pl-3">
+                  <h6>{{ dato.nivel }}</h6>
+                  <v-progress-linear
+                    :color="getValue(dato.nivel).color"
+                    height="5"
+                    :value="getValue(dato.nivel).valor"
+                  ></v-progress-linear> </v-card-text
+              ></v-flex>
+            </v-layout>
+          </v-card-text>
+        </TimeCard>
+        <TimeCard :data="referencia">
+          <v-card-text class="box title" slot="tema">REFERENCIAS</v-card-text>
+          <v-card-text
+            slot="informacion"
+            v-for="(conoc, index) in referencia"
+            :key="index"
+          >
+            <v-card-title slot="titulo " class="title font-weight-bold pa-2">{{
+              conoc.titulo
+            }}</v-card-title>
+            <v-divider></v-divider>
+            <v-layout row v-for="dato in conoc.dato" :key="dato.nombre">
+              <v-flex xs12 sm6 class="pa-2"
+                ><v-card-text class="text-xs-left py-2 pl-3 subheading"
+                  >{{ dato.nombre }}. {{ dato.parentezco }}</v-card-text
+                >
+                <v-card-text class="text-xs-left py-1 pl-5">{{
+                  dato.telefono
+                }}</v-card-text>
+                <v-card-text class="text-xs-left py-1 pl-5">{{
+                  dato.cargo
+                }}</v-card-text>
+              </v-flex>
             </v-layout>
           </v-card-text>
         </TimeCard>
@@ -173,7 +210,7 @@ export default {
           inicio: 2012,
           fin: 2019,
           descripcion:
-            "Profesor Particularde Matemáticas, Física, Química e Informática"
+            "Profesor Particular de Matemáticas, Física, Química e Informática"
         },
         {
           inicio: 2012,
@@ -194,7 +231,7 @@ export default {
             "Desarrollador de Hardware usando PIC, Arduino y Raspberry Pi, para la realización de proyectos académicos de tercer nivel y cuarto nivel."
         },
         {
-          inicio: 2015,
+          inicio: 2017,
           fin: 2019,
           descripcion:
             "Desarrollador y Diseño de páginas web mediante el stack MEVN (Mongodb, Express.js, Vue.js y Node.js)."
@@ -219,7 +256,7 @@ export default {
             { nombre: "Excel", nivel: "Medio-Alto" },
             { nombre: "Proteus", nivel: "Medio-Alto" },
             { nombre: "Ansys Electronic", nivel: "Medio" },
-            { nombre: "Lab View", nivel: "Medio" }
+            { nombre: "LabView", nivel: "Medio" }
           ]
         },
         {
@@ -236,7 +273,6 @@ export default {
             { nombre: "Python", nivel: "Medio" },
             { nombre: "PHP", nivel: "Medio" },
             { nombre: "Linux", nivel: "Medio" },
-            { nombre: "GIT", nivel: "Medio" },
             { nombre: "POO", nivel: "bajo" }
           ]
         },
@@ -244,15 +280,62 @@ export default {
           titulo: "OTROS",
           dato: [
             { nombre: "Hosting && Dominio", nivel: "Medio-Alto" },
-            { nombre: "Electrónca", nivel: "Medio-Alto" },
+            { nombre: "Electrónica", nivel: "Medio-Alto" },
             { nombre: "Diseño 2D", nivel: "Medio-Alto" },
             { nombre: "Diseño 3D", nivel: "Medio-Alto" },
             { nombre: "Redes Conmutadas", nivel: "Medio" },
             { nombre: "Edición de Video", nivel: "Medio" }
           ]
         }
+      ],
+      referencia: [
+        {
+          titulo: "REFERENCIAS FAMILIARES",
+          dato: [
+            {
+              nombre: "Carlos Alfredo García Vidal",
+              telefono: "0982501327",
+              parentezco: "Padre",
+              cargo: "Visitador Médico"
+            },
+            {
+              nombre: "Hilda Tamara Morán Vicuña",
+              telefono: "0987596780",
+              parentezco: "Madre",
+              cargo: "Jefa de Ventas"
+            }
+          ]
+        },
+        {
+          titulo: "REFERENCIAS PERSONALES",
+          dato: [
+            {
+              nombre: "Ing. Priscila Elizabeth Bermeo Ramos",
+              telefono: "0992958873",
+              cargo: "Gerente General"
+            },
+            {
+              nombre: "Msc. Cpa. Zoila Franco",
+              telefono: "0994491214",
+              cargo: "Docente"
+            }
+          ]
+        }
       ]
     };
+  },
+  methods: {
+    getValue(text) {
+      if (text === "Alto") {
+        return { valor: 100, color: "green" };
+      } else if (text === "Medio-Alto") {
+        return { valor: 75, color: "blue" };
+      } else if (text === "Medio") {
+        return { valor: 50, color: "orange" };
+      } else {
+        return { valor: 25, color: "red" };
+      }
+    }
   }
 };
 </script>
