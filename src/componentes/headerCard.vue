@@ -1,168 +1,183 @@
 <template>
   <v-container>
     <v-layout column>
-      <v-flex>
-        <v-card>
-          <v-card-text class="pa-5 display-1 font-weight-bold"
-            >HOJA DE VIDA</v-card-text
-          >
-          <v-card-text class="text-md-center box title">
-            INFORMACIÓN PERSONAL
-          </v-card-text>
-          <v-card-text>
-            <v-container>
-              <v-layout wrap row>
-                <v-flex xs12 sm8>
-                  <v-flex xs12>
-                    <v-layout
-                      wrap
-                      row
-                      v-for="(datos, ind) in datosPersonales"
-                      :key="ind"
-                    >
-                      <v-flex xs12 sm3>
-                        <v-card-text class="text-sm-right pa-2 text-xs-center"
-                          ><strong>{{ datos.titulo }}:</strong></v-card-text
-                        >
-                      </v-flex>
-                      <v-flex xs12 sm9>
-                        <v-card-text class="text-sm-left pa-2 text-xs-center">
-                          {{ datos.nombre }}
-                        </v-card-text>
+      <v-card flat>
+        <v-flex>
+          <v-card flat>
+            <v-card-text class="pa-5 display-2 font-weight-bold"
+              >HOJA DE VIDA</v-card-text
+            >
+            <v-card-text class="text-md-center box headline">
+              INFORMACIÓN PERSONAL
+            </v-card-text>
+            <v-card-text>
+              <v-container>
+                <v-layout wrap row>
+                  <v-flex xs12 sm8>
+                    <v-flex xs12>
+                      <v-layout
+                        wrap
+                        row
+                        v-for="(datos, ind) in datosPersonales"
+                        :key="ind"
+                      >
+                        <v-flex xs12 sm3>
+                          <v-card-text
+                            class="text-sm-right pa-2 text-xs-center subheading"
+                            ><strong>{{ datos.titulo }}:</strong></v-card-text
+                          >
+                        </v-flex>
+                        <v-flex xs12 sm9>
+                          <v-card-text
+                            class="text-sm-left pa-2 text-xs-center subheading"
+                          >
+                            {{ datos.nombre }}
+                          </v-card-text>
+                        </v-flex>
+                      </v-layout>
+                    </v-flex>
+                  </v-flex>
+                  <v-flex xs12 sm4>
+                    <v-layout row justify-center align-center>
+                      <v-flex xs12>
+                        <v-hover>
+                          <v-img
+                            slot-scope="{
+                              hover
+                            }"
+                            :class="`elevation-${hover ? 5 : 3}`"
+                            height="200"
+                            width="150"
+                            src="https://uploads.codesandbox.io/uploads/user/17fffd86-3ee1-4ca9-abc0-4e76a2cb57f0/dfNi-img.jpg"
+                            aspect-ratio="0.75"
+                          ></v-img>
+                        </v-hover>
                       </v-flex>
                     </v-layout>
                   </v-flex>
+                </v-layout>
+              </v-container>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+        <v-flex>
+          <TimeCard :data="formacionAcademica">
+            <v-card-text class="box headline" slot="tema"
+              >FORMACIÓN ACADÉMICA</v-card-text
+            >
+            <v-card-text
+              class="text-xs-left pa-2 subheading"
+              slot="time"
+              slot-scope="tiempos"
+            >
+              {{ tiempos.item.inicio }} - {{ tiempos.item.fin }}
+            </v-card-text>
+            <v-card-text
+              class="text-xs-left pa-2 subheading"
+              slot="descripcion"
+              slot-scope="info"
+            >
+              {{ info.item.descripcion }}
+            </v-card-text>
+          </TimeCard>
+          <TimeCard :data="experienciaLaboral">
+            <v-card-text class="box title" slot="tema"
+              >EXPERIENCIA LABORAL</v-card-text
+            >
+            <v-card-text
+              class="text-xs-left pa-2 subheading"
+              slot="time"
+              slot-scope="tiempos"
+            >
+              {{ tiempos.item.inicio }} - {{ tiempos.item.fin }}
+            </v-card-text>
+            <v-card-text
+              class="text-xs-left pa-2 subheading"
+              slot="descripcion"
+              slot-scope="info"
+            >
+              {{ info.item.descripcion }}
+            </v-card-text>
+          </TimeCard>
+          <TimeCard :data="conocimientos">
+            <v-card-text class="box headline" slot="tema"
+              >CONOCIMIENTOS</v-card-text
+            >
+            <v-card-text
+              slot="informacion"
+              v-for="(conoc, index) in conocimientos"
+              :key="index"
+            >
+              <v-card-title
+                slot="titulo "
+                class="title font-weight-bold pa-2 "
+                >{{ conoc.titulo }}</v-card-title
+              >
+              <v-divider></v-divider>
+              <v-layout row>
+                <v-flex xs6 sm6>
+                  <v-card-text
+                    class="text-xs-left pa-3 subheading font-weight-bold"
+                    >NOMBRE</v-card-text
+                  >
                 </v-flex>
-                <v-flex xs12 sm4>
-                  <v-layout row justify-center align-center>
-                    <v-flex xs12>
-                      <v-hover>
-                        <v-img
-                          slot-scope="{
-                            hover
-                          }"
-                          :class="`elevation-${hover ? 5 : 3}`"
-                          height="200"
-                          width="150"
-                          src="https://uploads.codesandbox.io/uploads/user/17fffd86-3ee1-4ca9-abc0-4e76a2cb57f0/dfNi-img.jpg"
-                          aspect-ratio="0.75"
-                        ></v-img>
-                      </v-hover>
-                    </v-flex>
-                  </v-layout>
+                <v-flex xs6 sm6>
+                  <v-card-text
+                    class="text-xs-left  pa-3 subheading font-weight-bold"
+                    >NIVEL</v-card-text
+                  >
                 </v-flex>
               </v-layout>
-            </v-container>
-          </v-card-text>
-        </v-card>
-      </v-flex>
-      <v-flex>
-        <TimeCard :data="formacionAcademica">
-          <v-card-text class="box title" slot="tema"
-            >FORMACIÓN ACADÉMICA</v-card-text
-          >
-          <v-card-text
-            class="text-xs-left pa-2"
-            slot="time"
-            slot-scope="tiempos"
-          >
-            {{ tiempos.item.inicio }} - {{ tiempos.item.fin }}
-          </v-card-text>
-          <v-card-text
-            class="text-xs-left pa-2"
-            slot="descripcion"
-            slot-scope="info"
-          >
-            {{ info.item.descripcion }}
-          </v-card-text>
-        </TimeCard>
-        <TimeCard :data="experienciaLaboral">
-          <v-card-text class="box title" slot="tema"
-            >EXPERIENCIA LABORAL</v-card-text
-          >
-          <v-card-text
-            class="text-xs-left pa-2"
-            slot="time"
-            slot-scope="tiempos"
-          >
-            {{ tiempos.item.inicio }} - {{ tiempos.item.fin }}
-          </v-card-text>
-          <v-card-text
-            class="text-xs-left pa-2"
-            slot="descripcion"
-            slot-scope="info"
-          >
-            {{ info.item.descripcion }}
-          </v-card-text>
-        </TimeCard>
-        <TimeCard :data="conocimientos">
-          <v-card-text class="box title" slot="tema">CONOCIMIENTOS</v-card-text>
-          <v-card-text
-            slot="informacion"
-            v-for="(conoc, index) in conocimientos"
-            :key="index"
-          >
-            <v-card-title slot="titulo " class="title font-weight-bold pa-2">{{
-              conoc.titulo
-            }}</v-card-title>
-            <v-divider></v-divider>
-            <v-layout row>
-              <v-flex xs6 sm6>
-                <v-card-text class="text-xs-left pa-3 body-2 font-weight-bold"
-                  >NOMBRE</v-card-text
+              <v-layout row v-for="dato in conoc.dato" :key="dato.nombre">
+                <v-flex xs6 sm6
+                  ><v-card-text class="text-xs-left pa-2 pl-3 subheading">{{
+                    dato.nombre
+                  }}</v-card-text></v-flex
                 >
-              </v-flex>
-              <v-flex xs6 sm6>
-                <v-card-text class="text-xs-left  pa-3 body-2 font-weight-bold"
-                  >NIVEL</v-card-text
-                >
-              </v-flex>
-            </v-layout>
-            <v-layout row v-for="dato in conoc.dato" :key="dato.nombre">
-              <v-flex xs6 sm6
-                ><v-card-text class="text-xs-left pa-2 pl-3">{{
-                  dato.nombre
-                }}</v-card-text></v-flex
+                <v-flex xs6 sm6
+                  ><v-card-text class="text-xs-left pa-2 pl-3 ">
+                    <h5>{{ dato.nivel }}</h5>
+                    <v-progress-linear
+                      :color="getValue(dato.nivel).color"
+                      height="5"
+                      :value="getValue(dato.nivel).valor"
+                    ></v-progress-linear> </v-card-text
+                ></v-flex>
+              </v-layout>
+            </v-card-text>
+          </TimeCard>
+          <TimeCard :data="referencia">
+            <v-card-text class="box headline" slot="tema"
+              >REFERENCIAS</v-card-text
+            >
+            <v-card-text
+              slot="informacion"
+              v-for="(conoc, index) in referencia"
+              :key="index"
+            >
+              <v-card-title
+                slot="titulo "
+                class="title font-weight-bold pa-2"
+                >{{ conoc.titulo }}</v-card-title
               >
-              <v-flex xs6 sm6
-                ><v-card-text class="text-xs-left pa-2 pl-3">
-                  <h6>{{ dato.nivel }}</h6>
-                  <v-progress-linear
-                    :color="getValue(dato.nivel).color"
-                    height="5"
-                    :value="getValue(dato.nivel).valor"
-                  ></v-progress-linear> </v-card-text
-              ></v-flex>
-            </v-layout>
-          </v-card-text>
-        </TimeCard>
-        <TimeCard :data="referencia">
-          <v-card-text class="box title" slot="tema">REFERENCIAS</v-card-text>
-          <v-card-text
-            slot="informacion"
-            v-for="(conoc, index) in referencia"
-            :key="index"
-          >
-            <v-card-title slot="titulo " class="title font-weight-bold pa-2">{{
-              conoc.titulo
-            }}</v-card-title>
-            <v-divider></v-divider>
-            <v-layout row v-for="dato in conoc.dato" :key="dato.nombre">
-              <v-flex xs12 sm6 class="pa-2"
-                ><v-card-text class="text-xs-left py-2 pl-3 subheading"
-                  >{{ dato.nombre }}. {{ dato.parentezco }}</v-card-text
-                >
-                <v-card-text class="text-xs-left py-1 pl-5">{{
-                  dato.telefono
-                }}</v-card-text>
-                <v-card-text class="text-xs-left py-1 pl-5">{{
-                  dato.cargo
-                }}</v-card-text>
-              </v-flex>
-            </v-layout>
-          </v-card-text>
-        </TimeCard>
-      </v-flex>
+              <v-divider></v-divider>
+              <v-layout row v-for="dato in conoc.dato" :key="dato.nombre">
+                <v-flex xs12 sm12 class="pa-2"
+                  ><v-card-text class="text-xs-left py-2 pl-3 subheading"
+                    >{{ dato.nombre }}. {{ dato.parentezco }}</v-card-text
+                  >
+                  <v-card-text class="text-xs-left py-1 pl-5 subheading">{{
+                    dato.telefono
+                  }}</v-card-text>
+                  <v-card-text class="text-xs-left py-1 pl-5 subheading">{{
+                    dato.cargo
+                  }}</v-card-text>
+                </v-flex>
+              </v-layout>
+            </v-card-text>
+          </TimeCard>
+        </v-flex>
+      </v-card>
     </v-layout>
   </v-container>
 </template>
@@ -191,18 +206,19 @@ export default {
           inicio: 2019,
           fin: 2020,
           descripcion:
-            "Cursando Decimo Semestre de la carrera Ingenería Electrónica y Telecomunicaciones en la Espol"
+            "Cursando Decimo Semestre de la carrera Ingenería Electrónica y Telecomunicaciones en la ESPOL"
         },
         {
           inicio: 2006,
           fin: 2012,
           descripcion:
-            "Certificado de Secundaria en el Colegio 'Centro Educativo Bilingüe Interamericano'"
+            "Certificado de Secundaria en el Colegio 'Centro Educativo Bilingüe Interamericano', Calle: Dr Luis Orrantía Cornejo 106, Guayaquil 0905"
         },
         {
           inicio: 2000,
           fin: 2006,
-          descripcion: "Certificado de Primaria en El Libertador"
+          descripcion:
+            "Certificado de Primaria en El Libertador, Calle: Cdla. FAE, Mz. 5, Solares 2-9, Cosme Renella, Guayaquil"
         }
       ],
       experienciaLaboral: [
